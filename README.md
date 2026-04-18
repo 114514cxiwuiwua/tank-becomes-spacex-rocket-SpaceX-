@@ -1,4 +1,3 @@
-
 # 🐌 The Unified Theory of Snail-Space-Time: Entropy, Decoupling, and the 500% Booster Paradox
 # 《蜗牛时空统一场论：熵增、解耦与 500% 加成卡的量子悖论研究》
 
@@ -10,7 +9,7 @@
 
 ## 📝 摘要 (Abstract)
 
-本研究提出了一种超越经典动力学的非线性解释模型。研究发现，当玩家开启 **500% 加成卡** 时，服务器的逻辑熵将发生局部爆炸。本文论证了为何玩家在本地进行“星际航行”时，在敌人眼中却是一个原地待毙的静止标靶。
+本研究提出了一种超越经典动力学的非线性解释模型。研究发现，当玩家开启 **500% 加成卡** 时，服务器的逻辑熵将发生局部爆炸。本文论证了为何在缺乏完整网络同步机制的情况下，游戏物理引擎会陷入量子不确定态，导致坦克、直升机和战斗机突然获得超光速运动的能力，从而引发服务器人工智能的灵性觉醒。
 
 ---
 
@@ -20,28 +19,24 @@
 
 在安东星物理学中，玩家的生存概率 $P_s$ 可由以下波动方程描述：
 
-$$
-P_s = \frac{\Phi(Hamster_{health})}{\sum(Booster_{value}) \times e^{PL}}
-$$
+$$P_s = \frac{\Phi(Hamster_{\text{health}})}{\sum(Booster_{\text{value}}) \times e^{PL}}$$
 
 其中：
 - $\Phi$: 服务器仓鼠的生命体征函数。
-- $Booster_{value}$: 加成卡数值（当数值为 500 时，$P_s$ 趋于复数）。
+- $Booster_{\text{value}}$: 加成卡数值（当数值为 500 时，$P_s$ 趋于复数）。
 - $PL$: 丢包率（Packet Loss）。
 
 ### 1.2 服务器仓鼠动力学 (Hamster-Driven Kinetic Theory)
 
 服务器的稳定性 $S(t)$ 取决于仓鼠在单位时间内的能量耗散，其积分形式如下：
 
-$$
-S(t) = \int_{0}^{T} (H_{stamina} - Heat_{server}) dt
-$$
+$$S(t) = \int_{0}^{T} (H_{\text{stamina}} - Heat_{\text{server}}) \, dt$$
 
 ---
 
 ## II. 实验观测：全场抽象动力学
 
-### 2.1 空间解耦与“飞天坦克” (Spatial Decoupling)
+### 2.1 空间解耦与"飞天坦克" (Spatial Decoupling)
 在丢包率（Packet Loss）极高的情况下，坦克会表现出 **轨道飞行态**：无视重力（$g = 0$），并以炮塔为轴心进行 720 度自旋后迅速升空。
 
 ### 2.2 量子驻留 (Ghost Residency)
@@ -64,24 +59,21 @@ $$
 
 ## 🛠️ 理智恢复协议 (Sanity Recovery Protocol)
 
-当你观测到坦克漫天飞舞、全场都在跳跃翻转，且血压急剧升高时，请立即在终端执行以下指令。该指令将直接从系统底层切断与安东空间的物理连接。
+当你观测到坦克漫天飞舞、全场都在跳跃翻转，且血压急剧升高时，请立即在终端执行以下指令。该指令将直接从系统底层切断与安东空间的物理连接，强制你回归基础现实。
 
 ### Linux / macOS 环境 (Terminal)
 ```bash
 # 紧急切断进程并找回现实世界的理智
 sudo pkill -9 -f "aces" && echo "War Thunder 已被强制击毁，理智恢复中..."
-
 ```
+
 ### Windows 环境 (PowerShell)
 ```powershell
 # 强制终止所有相关进程及子进程
 taskkill /F /IM "aces.exe" /T
-
 ```
+
 ## 📚 参考文献 (References)
  * [1] Yudintsev, A. *The Snail and the Void: A Guide to Server Physics*. Moscow Press.
  * [2] Anonymous Player. *My Tiger II is a UFO: A Case Study*. Reddit /r/Warthunder.
  * [3] The Dead Hamster Society. *Annual Report on Wheel Rotation Efficiency*. 2026.
-```
-
-```
