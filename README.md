@@ -1,10 +1,4 @@
-GitHub 对 Markdown 中的数学公式（Math Expressions）有严格的语法要求。如果公式不显示，通常是因为公式块与正文之间缺少**空行**，或者是在表格（Table）中强行使用 LaTeX。
-这是一个**“终极版”**，我优化了所有语法：
- 1. **完全隔离公式块**：所有 $$ 块前后都预留了标准空行。
- 2. **去除表格内公式**：将表格内的复杂公式替换为易读的加粗文本，防止渲染冲突。
- 3. **原生 GitHub 兼容**：使用 GitHub 官方推荐的 math 渲染格式。
-直接复制以下全部内容到你的 README.md：
-```markdown
+
 # 🐌 The Unified Theory of Snail-Space-Time: Entropy, Decoupling, and the 500% Booster Paradox
 # 《蜗牛时空统一场论：熵增、解耦与 500% 加成卡的量子悖论研究》
 
