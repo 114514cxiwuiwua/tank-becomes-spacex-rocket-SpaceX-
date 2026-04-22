@@ -1,80 +1,61 @@
-import sys
-from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtCore import QTimer
-from PyQt5.QtWidgets import QMessageBox, QSystemTrayIcon, QMenu
-import psutil
+import json
 import time
 import threading
+from datetime import datetime
+from plyer import notification
+import os
 
-class WarThunderHealthGuard:
-    def __init__(self):
-        self.playtime_limit = 2 * 60 * 60  # 2 hours in seconds
-        self.playtime_recorded = 0
-        self.network_throttling = True
-        self.autostart = False
-        self.initial_consent = False
-        self.initUI()
+# Function to write daily playtime data to a JSON file
+def write_playtime_data(playtime_data):
+    with open('playtime_data.json', 'w') as f:
+        json.dump(playtime_data, f)
 
-    def initUI(self):
-        self.tray_icon = QSystemTrayIcon(self)
-        self.tray_icon.setIcon(QtGui.QIcon('icon.png'))  # Replace with a valid icon path
-        self.tray_icon.setVisible(True)
+# Function to show notifications based on game playtime
+def show_notification(level):
+    messages = {
+        'light': "You've been playing for 1 hour. Remember to take a break!",
+        'moderate': "You've been playing for 2 hours. It's time to stretch!",
+        'severe': "You've been playing for 4 hours. Consider taking a longer break!",
+        'hospital': "You've been playing for 6 hours. Please visit a hospital!"
+    }
+    notification.notify(
+        title='War Thunder Health Alert',
+        message=messages[level],
+        timeout=10
+    )
 
-        # Create context menu for the systray icon
-        menu = QMenu()
-        exit_action = menu.addAction("Exit")
-        exit_action.triggered.connect(self.exit)
-        self.tray_icon.setContextMenu(menu)
+# Function to monitor playtime
+def monitor_playtime():
+    playtime_data = {'date': datetime.now().strftime('%Y-%m-%d'), 'playtime_hours': 0}
+    start_time = datetime.now()
 
-        self.tray_icon.activated.connect(self.on_icon_click)
+    while True:
+        time.sleep(3600)  # Wait for 1 hour
+        playtime_data['playtime_hours'] += 1
 
-        self.request_user_consent()
+        if playtime_data['playtime_hours'] == 1:
+            show_notification('light')
+        elif playtime_data['playtime_hours'] == 2:
+            show_notification('moderate')
+        elif playtime_data['playtime_hours'] == 4:
+            show_notification('severe')
+        elif playtime_data['playtime_hours'] == 6:
+            show_notification('hospital')
+            break  # Stop monitoring after 6 hours
 
-    def request_user_consent(self):
-        reply = QMessageBox.question(None, 'Consent Required', 'Do you consent to the application running?','Yes', 'No')
-        if reply == QMessageBox.Yes:
-            self.initial_consent = True
-            self.start_monitoring()
-        else:
-            sys.exit(0)
+        write_playtime_data(playtime_data)
 
-    def start_monitoring(self):
-        self.playtime_thread = threading.Thread(target=self.monitor_playtime)
-        self.playtime_thread.start()
-
-    def monitor_playtime(self):
-        while True:
-            if self.initial_consent:
-                for proc in psutil.process_iter(['name']):
-                    if proc.info['name'] == 'WarThunder.exe':  # Adjust if necessary
-                        self.playtime_recorded += 1
-                        time.sleep(1)
-                        if self.playtime_recorded > self.playtime_limit:
-                            self.handle_limit_exceeded()
-                            break
-            time.sleep(1)
-
-    def handle_limit_exceeded(self):
-        if self.network_throttling:
-            self.simulate_network_throttling()
-        self.notify_user("Playtime limit exceeded!")
-
-    def simulate_network_throttling(self):
-        # Simulate network throttling (1KB upload)
-        pass  # Implementation details required
-
-    def notify_user(self, message):
-        self.tray_icon.showMessage('Notification', message, QSystemTrayIcon.Information, 2000)
-
-    def on_icon_click(self, reason):
-        if reason == QSystemTrayIcon.Trigger:
-            self.notify_user("Application is running")  # Provide current status
-
-    def exit(self):
-        self.tray_icon.hide()
-        sys.exit(0)
+# Function to request user consent
+def request_user_consent():
+    consent = input("Do you consent to monitor your game playtime for health alerts? (yes/no): ")
+    return consent.lower() == 'yes'
 
 if __name__ == '__main__':
-    app = QtWidgets.QApplication(sys.argv)
-    ex = WarThunderHealthGuard()
-    sys.exit(app.exec_())
+    if request_user_consent():
+        print("Starting War Thunder Health Monitor...")
+        monitor_thread = threading.Thread(target=monitor_playtime)
+        monitor_thread.start()
+    else:
+        print("User did not consent. Exiting...")
+
+# Disclaimer: This program tracks virtual health data for entertainment purposes only. Play responsibly!
